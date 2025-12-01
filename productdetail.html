@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GamingOdyssey - Product Detail Page">
+    <title>Product Detail - GamingOdyssey</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* ===== PRODUCT DETAIL PAGE STYLES ===== */
+        .product-detail-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        .product-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* ===== LEFT SIDE - PRODUCT IMAGES ===== */
+        .product-images-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        /* MAIN IMAGE - IMAGE GOES HERE */
+        .main-product-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(157, 78, 221, 0.1));
+        }
+
+        .main-product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* THUMBNAIL IMAGES - IMAGES GO HERE */
+        .thumbnail-images {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .thumbnail {
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition-normal);
+        }
+
+        .thumbnail:hover {
+            border-color: var(--purple-primary);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== RIGHT SIDE - PRODUCT INFO ===== */
+        .product-info-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .product-detail-title {
+            font-family: var(--font-primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .product-stock {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-detail-rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .rating-stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        .rating-text {
+            color: var(--text-gray);
+        }
+
+        .product-detail-price {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .current-price {
+            font-family: var(--font-primary);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--purple-light);
+        }
+
+        .old-price {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            text-decoration: line-through;
+        }
+
+        .product-description {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .specifications-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .specifications-box h3 {
+            font-family: var(--font-secondary);
+            color: var(--cyan-accent);
+            margin-bottom: 1rem;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(108, 99, 255, 0.1);
+            color: var(--text-gray);
+        }
+
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 500;
+        }
+
+        .spec-value {
+            color: var(--white);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quantity-selector span {
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+
+        .qty-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.2rem 0.5rem;
+            transition: var(--transition-fast);
+        }
+
+        .qty-btn:hover {
+            color: var(--purple-primary);
+        }
+
+        .qty-value {
+            font-family: var(--font-primary);
+            font-size: 1.1rem;
+            color: var(--white);
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .icon-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .icon-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            border-radius: 10px;
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .icon-btn:hover {
+            background: var(--purple-primary);
+            color: var(--white);
+        }
+
+        /* ===== CUSTOMER REVIEWS SECTION ===== */
+        .reviews-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .reviews-section h3 {
+            font-family: var(--font-primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .review-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .reviewer-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .review-stars {
+            color: #ffd700;
+        }
+
+        .review-text {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* ===== RELATED PRODUCTS SECTION ===== */
+        .related-products-section h3 {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+
+        .related-products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .product-detail-grid {
+                grid-template-columns: 1fr;
+            }
+            .related-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .action-buttons {
+                flex-direction: column;
+            }
+            .related-products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Hexagonal Background Pattern -->
+    <div class="hexagon-pattern"></div>
+
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav class="navbar">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <div class="logo-icon">🎮</div>
+            <span>GamingOdyssey</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for games, consoles, accessories...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <!-- Navigation Icons -->
+        <div class="nav-icons">
+            <div class="nav-icon" title="Shopping Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </div>
+            <div class="nav-icon" title="User Account">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="nav-icon" title="Wishlist">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="nav-icon" title="Menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ========== PRODUCT DETAIL CONTAINER ========== -->
+    <div class="product-detail-container">
+        
+        <div class="product-detail-grid">
+            
+            <!-- ===== LEFT SIDE - PRODUCT IMAGES ===== -->
+            <div class="product-images-section">
+                <!-- MAIN PRODUCT IMAGE - ADD YOUR IMAGE HERE -->
+                <!-- Line 196: Replace 'product-main.jpg' with your actual image filename -->
+                <div class="main-product-image">
+                    <img src="images/image6.png" alt="ProGamer Elite Console X5" onerror="this.src='https://via.placeholder.com/600x400/6c63ff/ffffff?text=Gaming+Controller'">
+                </div>
+
+                <!-- THUMBNAIL IMAGES - ADD YOUR IMAGES HERE -->
+                <div class="thumbnail-images">
+                    <!-- Line 203: Replace with your thumbnail image 1 -->
+                    <div class="thumbnail">
+                        <img src="images/image8.png" alt="Thumbnail 1" onerror="this.src='https://via.placeholder.com/150/6c63ff/ffffff?text=1'">
+                    </div>
+                    <!-- Line 207: Replace with your thumbnail image 2 -->
+                    <div class="thumbnail">
+                        <img src="images/image4.png" alt="Thumbnail 2" onerror="this.src='https://via.placeholder.com/150/9d4edd/ffffff?text=2'">
+                    </div>
+                    <!-- Line 211: Replace with your thumbnail image 3 -->
+                    <div class="thumbnail">
+                        <img src="images/image2.png" alt="Thumbnail 3" onerror="this.src='https://via.placeholder.com/150/c77dff/ffffff?text=3'">
+                    </div>
+                    <!-- Line 215: Replace with your thumbnail image 4 -->
+                    <div class="thumbnail">
+                        <img src="images/image1.png" alt="Thumbnail 4" onerror="this.src='https://via.placeholder.com/150/4cc9f0/ffffff?text=4'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== RIGHT SIDE - PRODUCT INFO ===== -->
+            <div class="product-info-section">
+                <h1 class="product-detail-title">ProGamer Elite Console X5</h1>
+                
+                <span class="product-stock">✓ In Stock</span>
+
+                <div class="product-detail-rating">
+                    <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-text">4.8 (1087 reviews)</span>
+                </div>
+
+                <div class="product-detail-price">
+                    <span class="current-price">$43.99</span>
+                    <span class="old-price">$65.99</span>
+                </div>
+
+                <p class="product-description">
+                    Experience gaming like never before with the ProGamer Elite Console X5. 
+                    Featuring cutting-edge graphics, ultra-fast loading times, and an immersive 
+                    gaming experience. Designed for both casual and professional gamers.
+                </p>
+
+                <div class="specifications-box">
+                    <h3>Specifications</h3>
+                    <div class="spec-row">
+                        <span class="spec-label">Platform</span>
+                        <span class="spec-value">PlayStation 5 / Xbox Series X</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Storage</span>
+                        <span class="spec-value">2TB SSD</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Frame Rate</span>
+                        <span class="spec-value">Up to 120fps</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Connectivity</span>
+                        <span class="spec-value">Wi-Fi 6, Bluetooth 5.1</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Warranty</span>
+                        <span class="spec-value">2 Years Manufacturer</span>
+                    </div>
+                </div>
+
+                <div class="quantity-selector">
+                    <span>Quantity:</span>
+                    <div class="quantity-controls">
+                        <button class="qty-btn" id="decreaseQty">-</button>
+                        <span class="qty-value" id="qtyValue">1</span>
+                        <button class="qty-btn" id="increaseQty">+</button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" style="flex: 1;" id="addToCartBtn">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <div class="icon-buttons">
+                        <button class="icon-btn" title="Compare">
+                            <i class="fas fa-balance-scale"></i>
+                        </button>
+                        <button class="icon-btn" title="Add to Wishlist">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="icon-btn" title="Share">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CUSTOMER REVIEWS SECTION ===== -->
+        <div class="reviews-section">
+            <h3>Customer Reviews</h3>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar">G</div>
+                    <div>
+                        <div class="reviewer-name">GamerPro2024</div>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="review-text">
+                    Absolutely incredible console! The graphics are stunning and load times are instant. Best purchase I've made this year.
+                </p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar">T</div>
+                    <div>
+                        <div class="reviewer-name">TechEnthusiast</div>
+                        <div class="review-stars">⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="review-text">
+                    Great console overall. The performance is excellent. Only minor issue is that it can get a bit loud during intense gaming sessions.
+                </p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar">C</div>
+                    <div>
+                        <div class="reviewer-name">CasualGamer99</div>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="review-text">
+                    Love everything about this console. Setup was easy, interface is intuitive, and the game library is fantastic!
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== RELATED PRODUCTS SECTION ===== -->
+        <div class="related-products-section">
+            <h3>Related Products</h3>
+
+            <div class="related-products-grid">
+                <!-- Related Product 1 - ADD IMAGE HERE -->
+                <!-- Line 334: Replace with your related product image 1 -->
+                <div class="product-card" data-category="headset">
+                    <div class="product-image">
+                        <div class="wishlist-icon">🤍</div>
+                        <img src="images/image10.png" alt="Elite Gaming Headphones Pro" onerror="this.src='https://via.placeholder.com/300x250/6c63ff/ffffff?text=Headphones'">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Elite Gaming Headphones Pro</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count">(4.7)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$149.99</span>
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-shopping-cart"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Product 2 - ADD IMAGE HERE -->
+                <!-- Line 357: Replace with your related product image 2 -->
+                <div class="product-card" data-category="keyboard">
+                    <div class="product-image">
+                        <div class="wishlist-icon">🤍</div>
+                        <img src="images/image3.png" alt="RGB Gaming Keyboard" onerror="this.src='https://via.placeholder.com/300x250/9d4edd/ffffff?text=Keyboard'">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">RGB Gaming Keyboard</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span class="rating-count">(4.5)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$89.99</span>
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-shopping-cart"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Product 3 - ADD IMAGE HERE -->
+                <!-- Line 380: Replace with your related product image 3 -->
+                <div class="product-card" data-category="mouse">
+                    <div class="product-image">
+                        <div class="wishlist-icon">🤍</div>
+                        <img src="images/image2.png" alt="Wireless Gaming Mouse" onerror="this.src='https://via.placeholder.com/300x250/c77dff/ffffff?text=Mouse'">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Wireless Gaming Mouse</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count">(4.9)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$79.99</span>
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-shopping-cart"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Product 4 - ADD IMAGE HERE -->
+                <!-- Line 403: Replace with your related product image 4 -->
+                <div class="product-card" data-category="controller">
+                    <div class="product-image">
+                        <div class="wishlist-icon">🤍</div>
+                        <img src="images/IMAGE12.png" alt="Premium Controller Skin" onerror="this.src='https://via.placeholder.com/300x250/4cc9f0/ffffff?text=Controller'">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Premium Controller Skin</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span class="rating-count">(4.3)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$24.99</span>
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-shopping-cart"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="footer-content">
+            <!-- Company Info -->
+            <div class="footer-section">
+                <a href="index.html" class="logo" style="margin-bottom: 1rem;">
+                    <div class="logo-icon">🎮</div>
+                    <span>GamingOdyssey</span>
+                </a>
+                <p>Your ultimate destination for gaming consoles, accessories, and everything gamers need to purchase.</p>
+                
+                <!-- Social Icons -->
+                <div class="social-icons">
+                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" title="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="categories.html">Shop All</a></li>
+                    <li><a href="#">Consoles</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Special Offers</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Service -->
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="contacts.html">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="footer-section">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to get special offers and exclusive deals!</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="subscribe-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 GamingOdyssey. All rights reserved. | <strong>AI Disclaimer:</strong> All product images on this website are AI-generated for demonstration purposes.</p>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT - LINKED TO MAIN JS FILE ========== -->
+    <script src="js/script.js"></script>
+    
+    <!-- ===== PRODUCT DETAIL PAGE SPECIFIC JAVASCRIPT ===== -->
+    <script>
+        // Quantity Controls
+        let quantity = 1;
+        
+        document.getElementById('decreaseQty').addEventListener('click', function() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('qtyValue').textContent = quantity;
+                console.log('Quantity decreased to:', quantity);
+            }
+        });
+
+        document.getElementById('increaseQty').addEventListener('click', function() {
+            quantity++;
+            document.getElementById('qtyValue').textContent = quantity;
+            console.log('Quantity increased to:', quantity);
+        });
+
+        // Add to Cart Button
+        document.getElementById('addToCartBtn').addEventListener('click', function() {
+            const productName = document.querySelector('.product-detail-title').textContent;
+            const price = document.querySelector('.current-price').textContent;
+            
+            console.log(`Added ${quantity}x ${productName} to cart at ${price} each`);
+            alert(`✅ Added ${quantity}x ${productName} to your cart!`);
+        });
+
+        // Thumbnail Click to Change Main Image
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const mainImage = document.querySelector('.main-product-image img');
+
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                const newSrc = this.querySelector('img').src;
+                mainImage.src = newSrc;
+            });
+        });
+    </script>
+</body>
+</html>
