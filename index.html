@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GamingOdyssey - Your ultimate destination for gaming consoles, accessories, and gear">
+    <title>GamingOdyssey - Home | Gaming Consoles & Accessories</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    
+    <!-- Hexagonal Background Pattern -->
+    <div class="hexagon-pattern"></div>
+
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav class="navbar">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <div class="logo-icon">🎮</div>
+            <span>GamingOdyssey</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for games, consoles, accessories...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <!-- Navigation Icons -->
+        <div class="nav-icons">
+            <div class="nav-icon" title="Shopping Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </div>
+            <div class="nav-icon" title="User Account">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="nav-icon" title="Wishlist">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="nav-icon" title="Menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                "Deck Out Your <span class="highlight">Console</span><br>
+                Take One Home, and Be<br>
+                <span class="highlight">Consoled</span> Level Up Your Play."
+            </h1>
+            <p class="hero-description">
+                Discover the ultimate collection of gaming consoles, accessories, and gear. 
+                From PlayStation to Xbox, Nintendo to premium peripherals, we've got 
+                everything gamers need.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="smoothScrollTo('products')">Get Started</button>
+                <button class="btn btn-secondary" onclick="window.location.href='categories.html'">How to Help</button>
+                <button class="btn btn-tertiary" onclick="window.gamingOdyssey.startGamingQuiz()">Take A Quiz</button>
+            </div>
+            
+            <!-- Carousel Dots -->
+            <div class="carousel-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="images/image1.png" alt="Gaming Controller" onerror="this.src='https://via.placeholder.com/600x500/6c63ff/ffffff?text=Gaming+Controller'">
+        </div>
+    </section>
+
+    <!-- ========== FEATURED PRODUCTS SECTION ========== -->
+    <section class="products-section" id="products">
+        <h2 class="section-title">Featured Products</h2>
+
+        <div class="products-grid">
+            <!-- Product Card 1 -->
+            <div class="product-card" data-category="mouse">
+                <div class="product-image">
+                    <div class="wishlist-icon">🤍</div>
+                    <img src="images/image2.png" alt="Razer DeathAdder V3 Pro" onerror="this.src='https://via.placeholder.com/300x250/6c63ff/ffffff?text=Gaming+Mouse'">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Razer DeathAdder V3 Pro - Gaming Wireless Mouse with HyperScroll</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-count">(5.0)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$129.99</span>
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="product-card" data-category="keyboard">
+                <div class="product-image">
+                    <div class="wishlist-icon">🤍</div>
+                    <span class="product-badge">New</span>
+                    <img src="images/image3.png" alt="Corsair K95 RGB Mechanical Gaming Keyboard" onerror="this.src='https://via.placeholder.com/300x250/6c63ff/ffffff?text=Gaming+Keyboard'">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Corsair K95 RGB Mechanical Gaming Keyboard - Cherry MX Speed</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-count">(4.8)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$199.99</span>
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="product-card" data-category="controller">
+                <div class="product-image">
+                    <div class="wishlist-icon">🤍</div>
+                    <span class="product-badge">Hot</span>
+                    <img src="images/image4.png" alt="Premium Controller Skin Pack" onerror="this.src='https://via.placeholder.com/300x250/6c63ff/ffffff?text=Controller+Skin'">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Premium Controller Skin Pack - Custom Designs for PS5 & Xbox</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span class="rating-count">(4.3)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$24.99</span>
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="product-card" data-category="headset">
+                <div class="product-image">
+                    <div class="wishlist-icon">🤍</div>
+                    <img src="images/image5.png" alt="SteelSeries Arctis Pro Wireless" onerror="this.src='https://via.placeholder.com/300x250/6c63ff/ffffff?text=Gaming+Headset'">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">SteelSeries Arctis Pro Wireless - Hi-Res Gaming Headset</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-count">(4.9)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$329.99</span>
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 5 -->
+            <div class="product-card" data-category="console">
+                <div class="product-image">
+                    <div class="wishlist-icon">🤍</div>
+                    <span class="product-badge">Sale</span>
+                    <img src="images/image6.png" alt="PlayStation 5 Console" onerror="this.src='https://via.placeholder.com/300x250/6c63ff/ffffff?text=PS5+Console'">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">PlayStation 5 Console - Digital Edition with DualSense</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-count">(5.0)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$449.99</span>
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 6 -->
+            <div class="product-card" data-category="chair">
+                <div class="product-image">
+                    <div class="wishlist-icon">🤍</div>
+                    <img src="images/image7.png" alt="Gaming Chair Pro" onerror="this.src='https://via.placeholder.com/300x250/6c63ff/ffffff?text=Gaming+Chair'">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Secretlab TITAN Evo Gaming Chair - Ergonomic Design</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-count">(4.7)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">$549.99</span>
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="footer-content">
+            <!-- Company Info -->
+            <div class="footer-section">
+                <a href="index.html" class="logo" style="margin-bottom: 1rem;">
+                    <div class="logo-icon">🎮</div>
+                    <span>GamingOdyssey</span>
+                </a>
+                <p>Your ultimate destination for gaming consoles, accessories, and everything gamers need to purchase.</p>
+                
+                <!-- Social Icons -->
+                <div class="social-icons">
+                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" title="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="categories.html">Shop All</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Special Offers</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Service -->
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="contacts.html">Contact Us</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="footer-section">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to get special offers and exclusive deals!</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="subscribe-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 GamingOdyssey. All rights reserved. | <strong>AI Disclaimer:</strong> All product images on this website are AI-generated for demonstration purposes.</p>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script src="js/script.js"></script>
+</body>
+</html>
