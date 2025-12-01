@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GamingOdyssey - Browse Categories">
+    <title>Categories - GamingOdyssey</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* ===== CATEGORIES PAGE STYLES ===== */
+        .categories-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+
+        .page-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        /* ===== SIDEBAR FILTERS ===== */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            font-family: var(--font-secondary);
+            color: var(--cyan-accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .filter-group:last-child {
+            border-bottom: none;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .filter-option:hover {
+            color: var(--white);
+        }
+
+        .filter-option input {
+            cursor: pointer;
+        }
+
+        /* ===== MAIN CONTENT AREA ===== */
+        .main-content {
+            min-height: 100vh;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-primary);
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .view-all-btn {
+            background: transparent;
+            border: 1px solid var(--purple-primary);
+            color: var(--purple-primary);
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            font-weight: 600;
+        }
+
+        .view-all-btn:hover {
+            background: var(--purple-primary);
+            color: var(--white);
+        }
+
+        /* ===== CATEGORY BOXES ===== */
+        .category-boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .category-box:hover {
+            background: rgba(108, 99, 255, 0.1);
+            border-color: var(--purple-primary);
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-name {
+            font-family: var(--font-secondary);
+            font-size: 1.1rem;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        /* ===== PRODUCTS SECTION ===== */
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .products-header h3 {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            color: var(--white);
+        }
+
+        .sort-filter {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            color: var(--text-gray);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .filter-btn:hover {
+            background: var(--purple-primary);
+            color: var(--white);
+        }
+
+        .browse-icons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .icon-btn-small {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            border-radius: 8px;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .icon-btn-small:hover {
+            background: var(--purple-primary);
+            color: var(--white);
+        }
+
+        /* ===== SHIPPING INFO BOXES ===== */
+        .shipping-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(108, 99, 255, 0.2);
+        }
+
+        .info-box {
+            text-align: center;
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(108, 99, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--purple-primary);
+        }
+
+        .info-box h4 {
+            font-family: var(--font-secondary);
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .page-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+            .category-boxes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .category-boxes {
+                grid-template-columns: 1fr;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .shipping-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Hexagonal Background Pattern -->
+    <div class="hexagon-pattern"></div>
+
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav class="navbar">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <div class="logo-icon">🎮</div>
+            <span>GamingOdyssey</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="categories.html" class="active">Categories</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for games, consoles, accessories...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <!-- Navigation Icons -->
+        <div class="nav-icons">
+            <div class="nav-icon" title="Shopping Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </div>
+            <div class="nav-icon" title="User Account">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="nav-icon" title="Wishlist">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="nav-icon" title="Menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ========== CATEGORIES CONTAINER ========== -->
+    <div class="categories-container">
+        
+        <div class="page-layout">
+            
+            <!-- ===== SIDEBAR FILTERS ===== -->
+            <aside class="sidebar">
+                <h3>Gaming Consoles</h3>
+                <div class="filter-group">
+                    <label class="filter-option">
+                        <input type="checkbox"> PlayStation
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Xbox
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Nintendo
+                    </label>
+                </div>
+
+                <h3>Computers</h3>
+                <div class="filter-group">
+                    <label class="filter-option">
+                        <input type="checkbox"> Gaming PC
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Laptops
+                    </label>
+                </div>
+
+                <h3>Accessories</h3>
+                <div class="filter-group">
+                    <label class="filter-option">
+                        <input type="checkbox"> Controllers
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Headsets
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Keyboards
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Mouse
+                    </label>
+                </div>
+
+                <h3>Price Range</h3>
+                <div class="filter-group">
+                    <label class="filter-option">
+                        <input type="checkbox"> Under $50
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> $50 - $100
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> $100 - $200
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Over $200
+                    </label>
+                </div>
+
+                <h3>Rating</h3>
+                <div class="filter-group">
+                    <label class="filter-option">
+                        <input type="checkbox"> ⭐⭐⭐⭐⭐ (5.0)
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> ⭐⭐⭐⭐ (4.0+)
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> ⭐⭐⭐ (3.0+)
+                    </label>
+                </div>
+            </aside>
+
+            <!-- ===== MAIN CONTENT AREA ===== -->
+            <main class="main-content">
+                
+                <!-- Best Selling Products Section -->
+                <div class="section-header">
+                    <h2>Best Selling Products</h2>
+                    <button class="view-all-btn">View All</button>
+                </div>
+
+                <div class="products-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 3rem;">
+                    <!-- Product 1 - ADD IMAGE HERE -->
+                    <!-- Line 308: Replace with your product image 1 -->
+                    <div class="product-card" data-category="mouse">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image2.png" alt="Gaming Mouse" onerror="this.src='https://via.placeholder.com/300x250/6c63ff/ffffff?text=Gaming+Mouse'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Razer DeathAdder V3 Pro</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(5.0)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$129.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 - ADD IMAGE HERE -->
+                    <!-- Line 331: Replace with your product image 2 -->
+                    <div class="product-card" data-category="keyboard">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image3.png" alt="Gaming Keyboard" onerror="this.src='https://via.placeholder.com/300x250/9d4edd/ffffff?text=Keyboard'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Corsair K95 RGB Mechanical</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(4.8)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$199.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 - ADD IMAGE HERE -->
+                    <!-- Line 354: Replace with your product image 3 -->
+                    <div class="product-card" data-category="headset">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image5.png" alt="Gaming Headset" onerror="this.src='https://via.placeholder.com/300x250/c77dff/ffffff?text=Headset'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">SteelSeries Arctis Pro</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(4.9)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$329.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 - ADD IMAGE HERE -->
+                    <!-- Line 377: Replace with your product image 4 -->
+                    <div class="product-card" data-category="controller">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image8.png" alt="Controller" onerror="this.src='https://via.placeholder.com/300x250/4cc9f0/ffffff?text=Controller'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Premium Controller Skin</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐</span>
+                                <span class="rating-count">(4.3)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$24.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Browse by Category Section -->
+                <div class="section-header">
+                    <h2>Browse by Category</h2>
+                    <button class="view-all-btn">New Products</button>
+                </div>
+
+                <div class="category-boxes">
+                    <div class="category-box">
+                        <div class="category-icon">🖥️</div>
+                        <div class="category-name">Gaming PCs</div>
+                    </div>
+                    <div class="category-box">
+                        <div class="category-icon">🎮</div>
+                        <div class="category-name">Consoles</div>
+                    </div>
+                    <div class="category-box">
+                        <div class="category-icon">📱</div>
+                        <div class="category-name">Accessories</div>
+                    </div>
+                </div>
+
+                <!-- Gaming Products Section -->
+                <div class="products-header">
+                    <h3>Gaming Products</h3>
+                    <div class="sort-filter">
+                        <select class="filter-btn">
+                            <option>Sort By</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Rating</option>
+                        </select>
+                        <select class="filter-btn">
+                            <option>Popular</option>
+                            <option>New Arrivals</option>
+                            <option>Best Sellers</option>
+                        </select>
+                        <div class="browse-icons">
+                            <button class="icon-btn-small"><i class="fas fa-th"></i></button>
+                            <button class="icon-btn-small"><i class="fas fa-list"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="products-grid">
+                    <!-- Product 5 - ADD IMAGE HERE -->
+                    <!-- Line 449: Replace with your product image 5 -->
+                    <div class="product-card" data-category="console">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image6.png" alt="Console" onerror="this.src='https://via.placeholder.com/300x250/6c63ff/ffffff?text=Console'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Sony PlayStation 5 Pro</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(5.0)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$499.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 - ADD IMAGE HERE -->
+                    <!-- Line 472: Replace with your product image 6 -->
+                    <div class="product-card" data-category="controller">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image1.png" alt="Controller" onerror="this.src='https://via.placeholder.com/300x250/9d4edd/ffffff?text=Controller'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Xbox Elite Controller</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(4.7)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$179.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 7 - ADD IMAGE HERE -->
+                    <!-- Line 495: Replace with your product image 7 -->
+                    <div class="product-card" data-category="keyboard">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image3.png" alt="Keyboard" onerror="this.src='https://via.placeholder.com/300x250/c77dff/ffffff?text=Keyboard'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Razer BlackWidow V3</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐</span>
+                                <span class="rating-count">(4.6)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$139.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 8 - ADD IMAGE HERE -->
+                    <!-- Line 518: Replace with your product image 8 -->
+                    <div class="product-card" data-category="mouse">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image9.png" alt="Mouse" onerror="this.src='https://via.placeholder.com/300x250/4cc9f0/ffffff?text=Mouse'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Logitech G Pro Wireless</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(4.8)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$149.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 9 - ADD IMAGE HERE -->
+                    <!-- Line 541: Replace with your product image 9 -->
+                    <div class="product-card" data-category="headset">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image10.png" alt="Headset" onerror="this.src='https://via.placeholder.com/300x250/6c63ff/ffffff?text=Headset'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">HyperX Cloud Alpha</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐</span>
+                                <span class="rating-count">(4.5)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$99.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 10 - ADD IMAGE HERE -->
+                    <!-- Line 564: Replace with your product image 10 -->
+                    <div class="product-card" data-category="chair">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image7.png" alt="Chair" onerror="this.src='https://via.placeholder.com/300x250/9d4edd/ffffff?text=Chair'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Secretlab TITAN Evo</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(4.9)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$549.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 11 - ADD IMAGE HERE -->
+                    <!-- Line 587: Replace with your product image 11 -->
+                    <div class="product-card" data-category="monitor">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image11.png" alt="Monitor" onerror="this.src='https://via.placeholder.com/300x250/c77dff/ffffff?text=Monitor'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">ASUS ROG 27" 165Hz</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(4.8)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$399.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 12 - ADD IMAGE HERE -->
+                    <!-- Line 610: Replace with your product image 12 -->
+                    <div class="product-card" data-category="webcam">
+                        <div class="product-image">
+                            <div class="wishlist-icon">🤍</div>
+                            <img src="images/image8.png" alt="Webcam" onerror="this.src='https://via.placeholder.com/300x250/4cc9f0/ffffff?text=Webcam'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Logitech StreamCam</h3>
+                            <div class="product-rating">
+                                <span class="stars">⭐⭐⭐⭐</span>
+                                <span class="rating-count">(4.4)</span>
+                            </div>
+                            <div class="product-footer">
+                                <span class="product-price">$169.99</span>
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Info Section -->
+                <div class="shipping-info">
+                    <div class="info-box">
+                        <div class="info-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h4>FREE DELIVERY CHARGE</h4>
+                        <p>On orders over $100</p>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>24/7 CUSTOMER SERVICES</h4>
+                        <p>Always here to help</p>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>SECURE ONLINE PAYMENT</h4>
+                        
