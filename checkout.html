@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GamingOdyssey - Checkout Page">
+    <title>Checkout - GamingOdyssey</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* Additional Checkout-Specific Styles */
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 3rem;
+            padding: 3rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .checkout-form-section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .checkout-title {
+            font-family: var(--font-primary);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.3rem;
+            color: var(--cyan-accent);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.9rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-normal);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(184, 184, 184, 0.5);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--purple-primary);
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 20px rgba(108, 99, 255, 0.2);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .payment-method {
+            width: 70px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            padding: 0.5rem;
+        }
+
+        .payment-method img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .payment-method:hover {
+            border-color: var(--purple-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .order-summary {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .order-summary h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            color: var(--cyan-accent);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(108, 99, 255, 0.1);
+            color: var(--text-gray);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-row.total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            padding-top: 1.5rem;
+            margin-top: 1rem;
+            border-top: 2px solid rgba(108, 99, 255, 0.3);
+        }
+
+        .summary-row .label {
+            font-size: 1rem;
+        }
+
+        .summary-row .value {
+            font-family: var(--font-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .summary-row.total .value {
+            color: var(--purple-light);
+            font-size: 1.5rem;
+        }
+
+        .free-shipping {
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .checkout-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-checkout {
+            padding: 1rem 2rem;
+            font-family: var(--font-secondary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-checkout.primary {
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary));
+            color: var(--white);
+            box-shadow: 0 5px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-checkout.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(108, 99, 255, 0.6);
+        }
+
+        .btn-checkout.secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(108, 99, 255, 0.5);
+        }
+
+        .btn-checkout.secondary:hover {
+            background: rgba(108, 99, 255, 0.1);
+            border-color: var(--purple-primary);
+        }
+
+        .btn-checkout.tertiary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-gray);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-checkout.tertiary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .form-actions button {
+            flex: 1;
+        }
+
+        .btn-cancel {
+            background: transparent;
+            color: var(--text-gray);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+        }
+
+        .btn-complete {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .btn-complete:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        @media (max-width: 1024px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-container {
+                padding: 2rem 5%;
+            }
+
+            .payment-methods {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Hexagonal Background Pattern -->
+    <div class="hexagon-pattern"></div>
+
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav class="navbar">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <div class="logo-icon">🎮</div>
+            <span>GamingOdyssey</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for games, consoles, accessories...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <!-- Navigation Icons -->
+        <div class="nav-icons">
+            <div class="nav-icon" title="Shopping Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge">3</span>
+            </div>
+            <div class="nav-icon" title="User Account">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="nav-icon" title="Wishlist">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="nav-icon" title="Menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ========== CHECKOUT CONTAINER ========== -->
+    <div class="checkout-container">
+        
+        <!-- LEFT SIDE - CHECKOUT FORM -->
+        <div class="checkout-form-section">
+            <h1 class="checkout-title">Complete your order</h1>
+
+            <!-- PERSONAL DETAILS SECTION -->
+            <div class="form-section">
+                <h3>Personal Details</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First name</label>
+                        <input type="text" id="firstName" placeholder="Enter Your First Name..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last name</label>
+                        <input type="text" id="lastName" placeholder="Enter Your Last Name..." required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter Your Email..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone number</label>
+                        <input type="tel" id="phone" placeholder="Enter Your Phone Number..." required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAYMENT DETAILS SECTION -->
+            <div class="form-section">
+                <h3>Payment Details</h3>
+                
+                <!-- Payment Method Icons -->
+                <div class="payment-methods">
+                    <div class="payment-method" title="Visa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
+                    </div>
+                    <div class="payment-method" title="Stripe">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe">
+                    </div>
+                    <div class="payment-method" title="PayPal">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+                    </div>
+                    <div class="payment-method" title="Mastercard">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+                    </div>
+                    <div class="payment-method" title="Google Pay">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cardName">Card holder name</label>
+                        <input type="text" id="cardName" placeholder="Enter Your First Name..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardNumber">Card number</label>
+                        <input type="text" id="cardNumber" placeholder="Enter Your Card Number..." maxlength="19" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="Enter CVV..." maxlength="4" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expiry">Expiration Date</label>
+                        <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHIPPING ADDRESS SECTION -->
+            <div class="form-section">
+                <h3>Shipping Address</h3>
+                
+                <div class="form-group full-width">
+                    <label for="address">Address line 1</label>
+                    <input type="text" id="address" placeholder="Your Complete Address..." required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" placeholder="Your City..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" placeholder="Your State..." required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="landmark">Landmark</label>
+                        <input type="text" id="landmark" placeholder="Any Nearest Landmark Or Point Of Guide..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="postal">Postal code</label>
+                        <input type="text" id="postal" placeholder="Enter Code (1234567)..." required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="form-actions">
+                <button type="button" class="btn-checkout btn-cancel" onclick="window.location.href='cart.html'">
+                    Cancel
+                </button>
+                <button type="submit" class="btn-checkout btn-complete" id="completePurchaseBtn">
+                    Complete Purchase
+                </button>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE - ORDER SUMMARY -->
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+
+            <div class="summary-row">
+                <span class="label">Subtotal</span>
+                <span class="value" id="subtotal">$15.64</span>
+            </div>
+
+            <div class="summary-row">
+                <span class="label">Tax (10%)</span>
+                <span class="value" id="tax">$1.56</span>
+            </div>
+
+            <div class="summary-row">
+                <span class="label">Shipping</span>
+                <span class="value free-shipping">FREE</span>
+            </div>
+
+            <div class="summary-row total">
+                <span class="label">Total</span>
+                <span class="value" id="total">$17.20</span>
+            </div>
+
+            <div class="checkout-actions">
+                <button class="btn-checkout primary" id="proceedCheckoutBtn">
+                    <i class="fas fa-lock"></i> Proceed to Checkout
+                </button>
+                
+                <button class="btn-checkout secondary" onclick="window.location.href='categories.html'">
+                    <i class="fas fa-arrow-left"></i> Continue Shopping
+                </button>
+                
+                <button class="btn-checkout tertiary" id="saveForLaterBtn">
+                    <i class="far fa-bookmark"></i> Save for Later
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="footer-content">
+            <!-- Company Info -->
+            <div class="footer-section">
+                <a href="index.html" class="logo" style="margin-bottom: 1rem;">
+                    <div class="logo-icon">🎮</div>
+                    <span>GamingOdyssey</span>
+                </a>
+                <p>Your ultimate destination for gaming consoles, accessories, and everything gamers need to purchase.</p>
+                
+                <!-- Social Icons -->
+                <div class="social-icons">
+                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" title="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="categories.html">Shop All</a></li>
+                    <li><a href="#">Consoles</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Special Offers</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Service -->
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="contacts.html">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="footer-section">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to get special offers and exclusive deals!</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="subscribe-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 GamingOdyssey. All rights reserved. | <strong>AI Disclaimer:</strong> All product images on this website are AI-generated for demonstration purposes.</p>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script src="js/script.js"></script>
+    
+    <script>
+        // Checkout Page Specific JavaScript
+        
+        // Complete Purchase Button
+        document.getElementById('completePurchaseBtn').addEventListener('click', function() {
+            // Validate form fields
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const cardName = document.getElementById('cardName').value;
+            const cardNumber = document.getElementById('cardNumber').value;
+            const cvv = document.getElementById('cvv').value;
+            const expiry = document.getElementById('expiry').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const postal = document.getElementById('postal').value;
+
+            // Check if all fields are filled
+            if (!firstName || !lastName || !email || !phone || !cardName || !cardNumber || !cvv || !expiry || !address || !city || !state || !postal) {
+                alert('⚠️ Please fill in all required fields before completing your purchase!');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('⚠️ Please enter a valid email address!');
+                return;
+            }
+
+            // Card number validation (basic check for 16 digits)
+            const cardNumberClean = cardNumber.replace(/\s/g, '');
+            if (cardNumberClean.length < 13 || cardNumberClean.length > 19) {
+                alert('⚠️ Please enter a valid card number!');
+                return;
+            }
+
+            // CVV validation
+            if (cvv.length < 3 || cvv.length > 4) {
+                alert('⚠️ Please enter a valid CVV (3-4 digits)!');
+                return;
+            }
+
+            console.log('✅ Order completed successfully!');
+            console.log('Customer Details:', {
+                name: `${firstName} ${lastName}`,
+                email: email,
+                phone: phone,
+                address: `${address}, ${city}, ${state} - ${postal}`
+            });
+
+            alert('🎉 Thank you for your purchase! Your order has been placed successfully. You will receive a confirmation email shortly.');
+            
+            // Redirect to home page after 2 seconds
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+
+        // Proceed to Checkout Button
+        document.getElementById('proceedCheckoutBtn').addEventListener('click', function() {
+            // Scroll to top of form
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            alert('📝 Please complete the form below to proceed with your order.');
+        });
+
+        // Save for Later Button
+        document.getElementById('saveForLaterBtn').addEventListener('click', function() {
+            console.log('💾 Order saved for later');
+            alert('✅ Your order has been saved! You can continue shopping and complete it later.');
+        });
+
+        // Card number formatting (add spaces every 4 digits)
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Expiry date formatting (MM/YY)
+        document.getElementById('expiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Only allow numbers in CVV
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Only allow numbers in phone
+        document.getElementById('phone').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    </script>
+</body>
+</html>
