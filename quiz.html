@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GamingOdyssey - Gaming Quiz">
+    <title>Gaming Quiz - GamingOdyssey</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* ===== QUIZ PAGE STYLES ===== */
+        .quiz-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 5%;
+        }
+
+        .quiz-box {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-logo-icon {
+            font-size: 2rem;
+        }
+
+        .quiz-logo-text {
+            font-family: var(--font-primary);
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .quiz-title {
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-description {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .progress-section {
+            margin-bottom: 2rem;
+        }
+
+        .progress-text {
+            color: var(--purple-light);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .question-counter {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple-primary), var(--cyan-accent));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .question-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            color: var(--cyan-accent);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(108, 99, 255, 0.3);
+            border-radius: 10px;
+            padding: 1.2rem;
+            color: var(--white);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            font-size: 1rem;
+        }
+
+        .option:hover {
+            background: rgba(108, 99, 255, 0.2);
+            border-color: var(--purple-primary);
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: rgba(108, 99, 255, 0.3);
+            border-color: var(--purple-primary);
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .quiz-btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            font-family: var(--font-secondary);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .quiz-btn.cancel {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-gray);
+        }
+
+        .quiz-btn.cancel:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+        }
+
+        .quiz-btn.next {
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary));
+            color: var(--white);
+        }
+
+        .quiz-btn.next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(108, 99, 255, 0.5);
+        }
+
+        /* Results Page */
+        .results-box {
+            text-align: center;
+        }
+
+        .results-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-title {
+            font-family: var(--font-primary);
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .results-description {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .recommendations {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .recommendation-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .recommendation-card h4 {
+            color: var(--purple-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .recommendation-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-box {
+                padding: 2rem;
+            }
+            .recommendations {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Hexagonal Background Pattern -->
+    <div class="hexagon-pattern"></div>
+
+    <!-- ========== QUIZ CONTAINER ========== -->
+    <div class="quiz-container">
+        <div class="quiz-box">
+            
+            <!-- ===== QUIZ HEADER ===== -->
+            <div class="quiz-header">
+                <div class="quiz-logo">
+                    <span class="quiz-logo-icon">🎮</span>
+                    <span class="quiz-logo-text">GamingOdyssey</span>
+                </div>
+                <h1 class="quiz-title">Find Your Perfect Gaming Setup</h1>
+                <p class="quiz-description">
+                    Take a quick quiz to get personalized console and accessory recommendations based on your gaming style.
+                </p>
+            </div>
+
+            <!-- ===== PROGRESS SECTION ===== -->
+            <div class="progress-section">
+                <div class="progress-text" id="progressText">17% Complete</div>
+                <div class="question-counter" id="questionCounter">Question 1 of 8</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 12.5%"></div>
+                </div>
+            </div>
+
+            <!-- ===== QUESTION BOX ===== -->
+            <div class="question-box" id="questionBox">
+                <h2 class="question-text" id="questionText">What type of games do you play?</h2>
+                
+                <div class="options-container" id="optionsContainer">
+                    <div class="option" data-value="action">Action & Adventure</div>
+                    <div class="option" data-value="sports">Sports & Racing</div>
+                    <div class="option" data-value="rpg">RPG & Strategy</div>
+                    <div class="option" data-value="casual">Casual & Indie</div>
+                </div>
+            </div>
+
+            <!-- ===== QUIZ ACTIONS ===== -->
+            <div class="quiz-actions">
+                <button class="quiz-btn cancel" id="cancelBtn">Cancel</button>
+                <button class="quiz-btn next" id="nextBtn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- ===== RESULTS BOX (Hidden Initially) ===== -->
+            <div class="results-box" id="resultsBox" style="display: none;">
+                <div class="results-icon">🎉</div>
+                <h2 class="results-title">Your Perfect Gaming Setup!</h2>
+                <p class="results-description">
+                    Based on your preferences, we recommend high-performance gaming gear 
+                    optimized for your gaming style. Check out these products:
+                </p>
+
+                <div class="recommendations">
+                    <div class="recommendation-card">
+                        <h4>PlayStation 5 Pro</h4>
+                        <p>Perfect for action games</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4>Elite Controller</h4>
+                        <p>Enhanced precision</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4>Gaming Headset</h4>
+                        <p>Immersive audio</p>
+                    </div>
+                </div>
+
+                <button class="quiz-btn next" style="margin-top: 2rem;" onclick="window.location.href='categories.html'">
+                    View Products <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="footer-content">
+            <!-- Company Info -->
+            <div class="footer-section">
+                <a href="index.html" class="logo" style="margin-bottom: 1rem;">
+                    <div class="logo-icon">🎮</div>
+                    <span>GamingOdyssey</span>
+                </a>
+                <p>Your ultimate destination for gaming consoles, accessories, and everything gamers need to purchase.</p>
+                
+                <!-- Social Icons -->
+                <div class="social-icons">
+                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" title="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="categories.html">Shop All</a></li>
+                    <li><a href="#">Consoles</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Special Offers</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Service -->
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="contacts.html">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="footer-section">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to get special offers and exclusive deals!</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="subscribe-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 GamingOdyssey. All rights reserved. | <strong>AI Disclaimer:</strong> All product images on this website are AI-generated for demonstration purposes.</p>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT - LINKED TO MAIN JS FILE ========== -->
+    <script src="js/script.js"></script>
+    
+    <!-- ===== QUIZ PAGE SPECIFIC JAVASCRIPT ===== -->
+    <script>
+        // Quiz Questions
+        const quizQuestions = [
+            {
+                question: "What type of games do you play?",
+                options: ["Action & Adventure", "Sports & Racing", "RPG & Strategy", "Casual & Indie"]
+            },
+            {
+                question: "What's your gaming platform preference?",
+                options: ["PlayStation", "Xbox", "PC Gaming", "Nintendo Switch"]
+            },
+            {
+                question: "How often do you game?",
+                options: ["Daily (3+ hours)", "Several times a week", "Weekends only", "Occasionally"]
+            },
+            {
+                question: "What's your budget range?",
+                options: ["Under $500", "$500 - $1000", "$1000 - $2000", "Over $2000"]
+            },
+            {
+                question: "Do you play multiplayer games?",
+                options: ["Yes, mostly online", "Yes, local co-op", "Sometimes", "No, single-player only"]
+            },
+            {
+                question: "What's most important to you?",
+                options: ["Graphics Quality", "Performance (FPS)", "Storage Space", "Portability"]
+            },
+            {
+                question: "Do you stream or create content?",
+                options: ["Yes, regularly", "Yes, occasionally", "Planning to start", "No"]
+            },
+            {
+                question: "What accessory matters most?",
+                options: ["High-quality headset", "Mechanical keyboard", "Precision mouse", "Comfortable chair"]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        // DOM Elements
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const questionCounter = document.getElementById('questionCounter');
+        const nextBtn = document.getElementById('nextBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const questionBox = document.getElementById('questionBox');
+        const resultsBox = document.getElementById('resultsBox');
+
+        // Load Question
+        function loadQuestion() {
+            const question = quizQuestions[currentQuestion];
+            questionText.textContent = question.question;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Add new options
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option;
+                optionDiv.dataset.value = option;
+                
+                // Check if this was previously selected
+                if (answers[currentQuestion] === option) {
+                    optionDiv.classList.add('selected');
+                }
+                
+                optionDiv.addEventListener('click', function() {
+                    // Remove selected from all options
+                    document.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    // Add selected to clicked option
+                    this.classList.add('selected');
+                    answers[currentQuestion] = this.dataset.value;
+                });
+                
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            // Update progress
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            progressFill.style.width = progress + '%';
+            progressText.textContent = Math.round(progress) + '% Complete';
+            questionCounter.textContent = `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+        }
+
+        // Next Button
+        nextBtn.addEventListener('click', function() {
+            if (!answers[currentQuestion]) {
+                alert('⚠️ Please select an answer before continuing!');
+                return;
+            }
+
+            console.log(`Question ${currentQuestion + 1} answered: ${answers[currentQuestion]}`);
+
+            currentQuestion++;
+
+            if (currentQuestion < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                // Show results
+                showResults();
+            }
+        });
+
+        // Cancel Button
+        cancelBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to cancel the quiz?')) {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Show Results
+        function showResults() {
+            questionBox.style.display = 'none';
+            document.querySelector('.quiz-actions').style.display = 'none';
+            document.querySelector('.progress-section').style.display = 'none';
+            resultsBox.style.display = 'block';
+
+            console.log('🎉 Quiz completed!');
+            console.log('User answers:', answers);
+
+            // You can customize recommendations based on answers here
+            alert('🎉 Congratulations! You\'ve completed the quiz. Check out your personalized recommendations!');
+        }
+
+        // Initialize quiz
+        loadQuestion();
+    </script>
+</body>
+</html>
